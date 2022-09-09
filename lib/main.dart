@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import './category_meals_screen.dart';
-import './categories_screen.dart';
+import './screens/meal_detail_screen.dart';
+import './screens/category_meals_screen.dart';
+import './screens/categories_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,10 +35,19 @@ class MyApp extends StatelessWidget {
               )),
           appBarTheme: ThemeData.light().appBarTheme.copyWith(
               titleTextStyle: TextStyle(fontFamily: 'Raleway', fontSize: 24))),
-      home: const CategoriesScreen(),
+      // home: const CategoriesScreen(),
+      initialRoute: '/',
       routes: {
-        '/category-meals': (context) => CategoryMealsScreen(),
+        '/': ((context) => CategoriesScreen()),
+        CategoryMealsScreen.routeName: (context) => CategoryMealsScreen(),
+        MealDetailScreen.routeName: (context) => MealDetailScreen(),
       },
+      onGenerateRoute: ((settings) {
+        // return MaterialPageRoute(builder: (context) => CategoriesScreen());
+      }),
+      onUnknownRoute: ((settings) {
+        return MaterialPageRoute(builder: (context) => CategoriesScreen());
+      }),
     );
   }
 }
