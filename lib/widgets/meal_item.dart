@@ -9,6 +9,8 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Color color;
+  // final Function removeItem;
 
   const MealItem(
       {required this.id,
@@ -17,6 +19,8 @@ class MealItem extends StatelessWidget {
       required this.duration,
       required this.complexity,
       required this.affordability,
+      this.color = Colors.pink,
+      // required this.removeItem,
       Key? key})
       : super(key: key);
 
@@ -47,8 +51,12 @@ class MealItem extends StatelessWidget {
   }
 
   void selectMeal(BuildContext context) {
-    Navigator.of(context)
-        .pushNamed(MealDetailScreen.routeName, arguments: {'id': id});
+    Navigator.of(context).pushNamed(MealDetailScreen.routeName,
+        arguments: {'id': id, 'color': color}).then((result) {
+      if (result != null) {
+        // removeItem(result);
+      }
+    });
   }
 
   @override
@@ -121,7 +129,7 @@ class MealItem extends StatelessWidget {
                       const SizedBox(
                         width: 6,
                       ),
-                      Text(complexityText),
+                      Text(affordabilityText),
                     ],
                   ),
                 ],
